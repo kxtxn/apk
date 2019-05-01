@@ -420,8 +420,7 @@
 
   <!-- Modal Edit -->
 
-  <div class="modal fade" id="ubah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="ubah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -431,23 +430,22 @@
           </button>
         </div>
         <div class="modal-body" id="showedit">
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="tomboledit">Save changes</button>
-      </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="tomboledit">Save changes</button>
+        </div>
 
+      </div>
     </div>
   </div>
-    </div>
   </div>
 
 
 
   <!-- Modal Hapus -->
 
-  <div class="modal fade" id="hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -457,15 +455,15 @@
           </button>
         </div>
         <div class="modal-body" id="showhapus">
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="tombolhapus">Save changes</button>
-      </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="tombolhapus">Save changes</button>
+        </div>
 
+      </div>
     </div>
   </div>
-    </div>
   </div>
 
 
@@ -491,7 +489,7 @@
   <script type="text/javascript">
     $(document).ready(function () {
 
-      var url = "http://pkl.notaxcloth.com/katon/restfull-api/api/transaksi";
+      var url = "http://localhost/restfull-api/api/transaksi";
       $.getJSON(url, function (result) {
         console.log(result['data']);
         var no = 1;
@@ -512,10 +510,12 @@
                         <td>` + harga + `</td>
                         <td class="text-center">` + jumlah + `</td>
                         <td>` + total + `</td>
-                        <td>` + tanggal + `</td>
+                        <td>` + tanggal +
+            `</td>
                         <td class="text-center">
             <button type="button" class="btn btn-warning ubahdata" name="ubahdata" title="Ubah" data-toggle="modal" id="` +
-            id + `" onclick=""><i class="fa fa-edit"></i></button>
+            id +
+            `" onclick=""><i class="fa fa-edit"></i></button>
             <button type="button" class="btn btn-danger hapusdata" name="hapusdata" title="Hapus" data-toggle="modal" id="` +
             id + `" onclick=""><i class="fa fa-times"></i></button>
           </td>
@@ -529,7 +529,7 @@
       $("#tomboltambah").click(function () {
 
         $.ajax({
-          url: "http://pkl.notaxcloth.com/katon/restfull-api/api/transaksi",
+          url: "http://localhost/restfull-api/api/transaksi",
           type: "POST",
           data: $("#formtambah").serialize(),
           dataType: "JSON",
@@ -559,37 +559,39 @@
 
         return false;
       });
-      
-      $(document).on('click','.ubahdata', function(){
+
+      $(document).on('click', '.ubahdata', function () {
 
 
-                var id = $(this).attr('id');
-                console.log(id);
-                $.ajax({
-                    type: "GET",
-                    url: "http://pkl.notaxcloth.com/katon/restfull-api/api/transaksi",
-                    dataType: "JSON",
-                    data: {
-                        id: id
-                    },
-                    success: function (data) {
-                        console.log(data['data']);
-                        $.each(data['data'], function (i,field) {
-                          var harga = field.harga_satuan;
-          var produk = field.id_produk;
-          var id = field.id_transaksi;
-          var jumlah = field.jumlah;
-          var kode = field.kode_transaksi;
-          var total = field.sum_harga;
-          var tanggal = field.tanggal;
-          $('#ubah').modal('show');
+        var id = $(this).attr('id');
+        console.log(id);
+        $.ajax({
+          type: "GET",
+          url: "http://localhost/restfull-api/api/transaksi",
+          dataType: "JSON",
+          data: {
+            id: id
+          },
+          success: function (data) {
+            console.log(data['data']);
+            $.each(data['data'], function (i, field) {
+              var harga = field.harga_satuan;
+              var produk = field.id_produk;
+              var id = field.id_transaksi;
+              var jumlah = field.jumlah;
+              var kode = field.kode_transaksi;
+              var total = field.sum_harga;
+              var tanggal = field.tanggal;
+              $('#ubah').modal('show');
 
-                            $("#showedit").append(`
+              $("#showedit").append(
+                `
 
                             <form action="" method="post" id="formedit">
             <div class="form-group">
               <label for="ID">ID</label>
-              <input type="text" class="form-control" readonly id="id" name="id" aria-describedby="ID" placeholder="ID" value="` + id + `">
+              <input type="text" class="form-control" readonly id="id" name="id" aria-describedby="ID" placeholder="ID" value="` +
+                id + `">
             </div>
             <div class="form-group">
               <label for="Kode">Kode</label>
@@ -621,75 +623,77 @@
 
 
                             `);
-                            
-                        });
-                    }
-                });
-                return false;
+
             });
-            $("#tomboledit").click(function () {
-var data = $("#formedit").serialize();
-console.log(data);
-$.ajax({
-  url: "http://pkl.notaxcloth.com/katon/restfull-api/api/transaksi",
-  type: "PUT",
-  data: $("#formedit").serialize(),
-  dataType: "JSON",
-  beforeSend: function () {
-    $(".loading").html("Please wait....");
-  },
-  success: function (result) {
-    console.log(result);
-    if (result.status) {
+          }
+        });
+        return false;
+      });
+      $("#tomboledit").click(function () {
+        var data = $("#formedit").serialize();
+        console.log(data);
+        $.ajax({
+          url: "http://localhost/restfull-api/api/transaksi",
+          type: "PUT",
+          data: $("#formedit").serialize(),
+          dataType: "JSON",
+          beforeSend: function () {
+            $(".loading").html("Please wait....");
+          },
+          success: function (result) {
+            console.log(result);
+            if (result.status) {
 
-      alert("Selamat, resgistari sukses");
-      window.location.href =
-        "";
+              alert("Selamat, resgistari sukses");
+              window.location.href =
+                "";
 
-    } else {
+            } else {
 
-      alert("harap isi smw inputan");
-    }
+              alert("harap isi smw inputan");
+            }
 
-  },
-  error: function (xhr, Status, err) {
+          },
+          error: function (xhr, Status, err) {
 
-    $("Terjadi error : " + Status);
-  }
+            $("Terjadi error : " + Status);
+          }
 
-});
+        });
 
-return false;
-});
-
-
+        return false;
+      });
 
 
 
-$(document).on('click','.hapusdata', function(){
-  $('#hapus').modal('show');
 
-var id = $(this).attr('id');
-console.log(id);
-$.ajax({
-    type: "GET",
-    url: "http://pkl.notaxcloth.com/katon/restfull-api/api/transaksi",
-    dataType: "JSON",
-    data: {
-        id: id
-    },
-    success: function (data) {
-        console.log(data['data']);
-            $.each(data['data'], function (i,field) {
-            var id = field.id_transaksi;
-           
-                        $("#showhapus").append(`
+
+      $(document).on('click', '.hapusdata', function () {
+        $('#hapus').modal('show');
+
+        var id = $(this).attr('id');
+        console.log(id);
+        $.ajax({
+          type: "GET",
+          url: "http://localhost/restfull-api/api/transaksi",
+          dataType: "JSON",
+          data: {
+            id: id
+          },
+          success: function (data) {
+            console.log(data['data']);
+            $.each(data['data'], function (i, field) {
+              var id = field.id_transaksi;
+
+              $("#showhapus").append(
+                `
 
                        
                         <form action="" method="post" id="formhapus">
             <div class="form-group">
               <label for="ID">Apakah anda ingin menghapus data ini?</label>
-              <input type="hidden" class="form-control" id="id" name="id" aria-describedby="ID" placeholder="ID" value="` + id + `">
+              <input type="hidden" class="form-control" id="id" name="id" aria-describedby="ID" placeholder="ID" value="` +
+                id + `">
             </div>
         </div>
       </div>
@@ -697,50 +701,49 @@ $.ajax({
 
 
             `);
-            
+
+            });
+          }
         });
-    }
-});
-return false;
-});
-$("#tombolhapus").click(function () {
-var data = $("#formhapus").serialize();
-console.log(data);
-$.ajax({
-url: "http://pkl.notaxcloth.com/katon/restfull-api/api/transaksi",
-type: "DELETE",
-data: $("#formhapus").serialize(),
-dataType: "JSON",
-beforeSend: function () {
-$(".loading").html("Please wait....");
-},
-success: function (result) {
-console.log(result);
-if (result.status) {
+        return false;
+      });
+      $("#tombolhapus").click(function () {
+        var data = $("#formhapus").serialize();
+        console.log(data);
+        $.ajax({
+          url: "http://localhost/restfull-api/api/transaksi",
+          type: "DELETE",
+          data: $("#formhapus").serialize(),
+          dataType: "JSONP",
+          beforeSend: function () {
+            $(".loading").html("Please wait....");
+          },
+          success: function (result) {
+            console.log(result);
+            if (result.status) {
 
-alert("Selamat, resgistari sukses");
-window.location.href =
-"http://pkl.notaxcloth.com/katon/firstApp-master/www/index.html";
+              alert("Selamat, resgistari sukses");
+              window.location.href =
+                "";
 
-} else {
+            } else {
 
-alert("harap isi smw inputan");
-}
+              alert("harap isi smw inputan");
+            }
 
-},
-error: function (xhr, Status, err) {
+          },
+          error: function (xhr, Status, err) {
 
-$("Terjadi error : " + Status);
-}
+            $("Terjadi error : " + Status);
+          }
 
-});
+        });
 
-return false;
-});
+        return false;
+      });
 
 
     });
-
   </script>
 
 </body>
