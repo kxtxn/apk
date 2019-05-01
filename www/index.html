@@ -489,7 +489,7 @@
   <script type="text/javascript">
     $(document).ready(function () {
 
-      var url = "http://localhost/restfull-api/api/transaksi";
+      var url = "http://pkl.notaxcloth.com/katon/restfull-api/api/transaksi";
       $.getJSON(url, function (result) {
         console.log(result['data']);
         var no = 1;
@@ -529,7 +529,7 @@
       $("#tomboltambah").click(function () {
 
         $.ajax({
-          url: "http://localhost/restfull-api/api/transaksi",
+          url: "http://pkl.notaxcloth.com/katon/restfull-api/api/transaksi",
           type: "POST",
           data: $("#formtambah").serialize(),
           dataType: "JSON",
@@ -567,7 +567,7 @@
         console.log(id);
         $.ajax({
           type: "GET",
-          url: "http://localhost/restfull-api/api/transaksi",
+          url: "http://pkl.notaxcloth.com/katon/restfull-api/api/transaksi",
           dataType: "JSON",
           data: {
             id: id
@@ -633,7 +633,7 @@
         var data = $("#formedit").serialize();
         console.log(data);
         $.ajax({
-          url: "http://localhost/restfull-api/api/transaksi",
+          url: "http://pkl.notaxcloth.com/katon/restfull-api/api/transaksi",
           type: "PUT",
           data: $("#formedit").serialize(),
           dataType: "JSON",
@@ -675,7 +675,7 @@
         console.log(id);
         $.ajax({
           type: "GET",
-          url: "http://localhost/restfull-api/api/transaksi",
+          url: "http://pkl.notaxcloth.com/katon/restfull-api/api/transaksi",
           dataType: "JSON",
           data: {
             id: id
