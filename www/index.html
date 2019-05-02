@@ -269,14 +269,50 @@
           </button>
         </div>
         <div class="modal-body" id="showedit">
+          <form action="" method="post" id="formedit">
+            <div class="form-group">
+              <label for="ID">ID</label>
+              <input type="text" class="form-control" readonly id="id" name="id" aria-describedby="ID" placeholder="ID"
+                value="` +
+                    id + `">
+            </div>
+            <div class="form-group">
+              <label for="Kode">Kode</label>
+              <input type="text" class="form-control" id="kd" name="kd" placeholder="Kode" value="` + kode + `">
+            </div>
+            <div class="form-group">
+              <label for="Produk">Produk</label>
+              <input type="text" class="form-control" id="prdk" name="prdk" placeholder="Produk" value="` + produk + `">
+            </div>
+            <div class="form-group">
+              <label for="Harga">Harga</label>
+              <input type="text" class="form-control" id="hrg" name="hrg" placeholder="Harga" value="` + harga + `">
+            </div>
+            <div class="form-group">
+              <label for="Jumlah">Jumlah</label>
+              <input type="text" class="form-control" id="jml" name="jml" placeholder="Jumlah" value="` + jumlah + `">
+            </div>
+            <div class="form-group">
+              <label for="Total">Total</label>
+              <input type="text" class="form-control" id="smhrg" name="smhrg" placeholder="Total" value="` + total + `">
+            </div>
+            <div class="form-group">
+              <label for="Tanggal">Tanggal</label>
+              <input type="date" class="form-control" id="tgl" name="tgl" placeholder="Tanggal" value="` + tanggal + `">
+            </div>
         </div>
+
+
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
           <button type="button" class="btn btn-primary" id="tomboledit">Simpan</button>
         </div>
-
       </div>
     </div>
+    </form>
+
+  </div>
+  </div>
   </div>
   </div>
 
@@ -294,14 +330,24 @@
           </button>
         </div>
         <div class="modal-body" id="showhapus">
+          <form action="" method="post" id="formhapus">
+            <div class="form-group">
+              <label for="ID">Apakah anda ingin menghapus data ini?</label>
+              <input type="hidden" class="form-control" id="id" name="id" aria-describedby="ID" placeholder="ID" value="` +
+                    id + `">
+            </div>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
           <button type="button" class="btn btn-primary" id="tombolhapus">Ya</button>
         </div>
-
       </div>
     </div>
+    </form>
+
+  </div>
+  </div>
   </div>
   </div>
 
@@ -421,47 +467,18 @@
               var kode = field.kode_transaksi;
               var total = field.sum_harga;
               var tanggal = field.tanggal;
+              $('[id="id"]').val(id);
+              $('[id="hrg"]').val(harga);
+              $('[id="prdk"]').val(produk);
+              $('[id="id"]').val(id);
+              $('[id="jml"]').val(jumlah);
+              $('[id="kd"]').val(kode);
+              $('[id="smhrg"]').val(total);
+              $('[id="tgl"]').val(tanggal);
+
               $('#ubah').modal('show');
 
-              $("#showedit").append(
-                `
-
-                            <form action="" method="post" id="formedit">
-            <div class="form-group">
-              <label for="ID">ID</label>
-              <input type="text" class="form-control" readonly id="id" name="id" aria-describedby="ID" placeholder="ID" value="` +
-                id + `">
-            </div>
-            <div class="form-group">
-              <label for="Kode">Kode</label>
-              <input type="text" class="form-control" id="kd" name="kd" placeholder="Kode" value="` + kode + `">
-            </div>
-            <div class="form-group">
-              <label for="Produk">Produk</label>
-              <input type="text" class="form-control" id="prdk" name="prdk" placeholder="Produk" value="` + produk + `">
-            </div>
-            <div class="form-group">
-              <label for="Harga">Harga</label>
-              <input type="text" class="form-control" id="hrg" name="hrg" placeholder="Harga" value="` + harga + `">
-            </div>
-            <div class="form-group">
-              <label for="Jumlah">Jumlah</label>
-              <input type="text" class="form-control" id="jml" name="jml" placeholder="Jumlah" value="` + jumlah + `">
-            </div>
-            <div class="form-group">
-              <label for="Total">Total</label>
-              <input type="text" class="form-control" id="smhrg" name="smhrg" placeholder="Total" value="` + total + `">
-            </div>
-            <div class="form-group">
-              <label for="Tanggal">Tanggal</label>
-              <input type="date" class="form-control" id="tgl" name="tgl" placeholder="Tanggal" value="` + tanggal + `">
-            </div>
-        </div>
-      </div>
-      </form>
-
-
-                            `);
+              $("#showedit").append(``);
 
             });
           }
@@ -523,20 +540,12 @@
             console.log(data['data']);
             $.each(data['data'], function (i, field) {
               var id = field.id_transaksi;
+              $('[id="id"]').val(id);
 
               $("#showhapus").append(
                 `
 
                        
-                        <form action="" method="post" id="formhapus">
-            <div class="form-group">
-              <label for="ID">Apakah anda ingin menghapus data ini?</label>
-              <input type="hidden" class="form-control" id="id" name="id" aria-describedby="ID" placeholder="ID" value="` +
-                id + `">
-            </div>
-        </div>
-      </div>
-      </form>
 
 
             `);
